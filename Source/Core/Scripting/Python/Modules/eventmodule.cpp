@@ -244,9 +244,9 @@ static const std::tuple<u32, u32, PyObject*> PyFrameDrawn(const API::Events::Fra
   PyObject* pybytes = PyBytes_FromStringAndSize(data, num_bytes);
   return std::make_tuple(evt.width, evt.height, pybytes);
 }
-static const std::tuple<bool, u32, u64> PyMemoryBreakpoint(const API::Events::MemoryBreakpoint& evt)
+static const std::tuple<u32, bool, u32, u32, u64> PyMemoryBreakpoint(const API::Events::MemoryBreakpoint& evt)
 {
-  return std::make_tuple(evt.write, evt.addr, evt.value);
+  return std::make_tuple(evt.pc, evt.write, evt.size, evt.addr, evt.value);
 }
 static const std::tuple<u32> PyCodeBreakpoint(const API::Events::CodeBreakpoint& evt)
 {

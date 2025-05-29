@@ -27,7 +27,9 @@ struct FrameDrawn
 };
 struct MemoryBreakpoint
 {
+  u32 pc;
   bool write;
+  u32 size;
   u32 addr;
   u64 value;
 };

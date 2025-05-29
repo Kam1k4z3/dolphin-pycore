@@ -52,11 +52,13 @@ async def codebreakpoint() -> tuple[int,]:
 
 @type_check_only
 class _MemorybreakpointCallback(Protocol):
-    def __call__(self, is_write: bool, addr: int, value: int) -> None:
+    def __call__(self, pc : int, is_write: bool, size : int, addr: int, value: int) -> None:
         """
         Example callback stub for on_memorybreakpoint.
-
+		
+		:param pc : address of the called function
         :param is_write: true if a value was written, false if it was read
+		:param size : size in byte of the memory read/write 
         :param addr: address that was accessed
         :param value: new value at the given address
         """

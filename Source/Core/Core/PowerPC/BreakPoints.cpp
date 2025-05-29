@@ -401,10 +401,10 @@ bool TMemCheck::Action(Core::System& system, u64 value, u32 addr, bool write, si
   if (!is_enabled)
     return false;
 
-  //API::GetEventHub().EmitEvent(API::Events::MemoryBreakpoint{write, addr, value});
   if (((write && is_break_on_write) || (!write && is_break_on_read)) &&
       EvaluateCondition(system, this->condition))
   {
+    API::GetEventHub().EmitEvent(API::Events::MemoryBreakpoint{pc, write, u32(size), addr, value});
     if (log_on_hit)
     {
       auto& ppc_symbol_db = system.GetPPCSymbolDB();
