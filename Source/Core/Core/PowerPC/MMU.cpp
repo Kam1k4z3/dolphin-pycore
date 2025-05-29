@@ -259,11 +259,14 @@ T MMU::ReadFromHardware(u32 em_address)
   }
 
   PanicAlertFmt("Unable to resolve read address {:x} PC {:x}", em_address, m_ppc_state.pc);
-  if (m_system.IsPauseOnPanicMode())
-  {
-    m_system.GetCPU().Break();
-    m_ppc_state.Exceptions |= EXCEPTION_DSI | EXCEPTION_FAKE_MEMCHECK_HIT;
-  }
+  // Blounard : to attempt removing any crashes related, we don't execute the code below.
+  //  It returns 0 instead of breaking.
+
+  // if (m_system.IsPauseOnPanicMode())
+  //{
+  //   m_system.GetCPU().Break();
+  //   m_ppc_state.Exceptions |= EXCEPTION_DSI | EXCEPTION_FAKE_MEMCHECK_HIT;
+  // }
   return 0;
 }
 
@@ -449,11 +452,16 @@ void MMU::WriteToHardware(u32 em_address, const u32 data, const u32 size)
   }
 
   PanicAlertFmt("Unable to resolve write address {:x} PC {:x}", em_address, m_ppc_state.pc);
-  if (m_system.IsPauseOnPanicMode())
-  {
-    m_system.GetCPU().Break();
-    m_ppc_state.Exceptions |= EXCEPTION_DSI | EXCEPTION_FAKE_MEMCHECK_HIT;
-  }
+  //Blounard : to attempt removing any crashes related, we don't execute the code below.
+  // It completely skips the write memory function.
+
+  return;
+
+  //if (m_system.IsPauseOnPanicMode())
+  //{
+  //  m_system.GetCPU().Break();
+  //  m_ppc_state.Exceptions |= EXCEPTION_DSI | EXCEPTION_FAKE_MEMCHECK_HIT;
+  //}
 }
 // =====================
 
