@@ -21,6 +21,8 @@ struct FileState
 };
 
 static std::string scriptDir;
+static std::string dumpDir;
+static std::string userDir;
 
 static PyObject* get_game_id(PyObject* module, PyObject* args)
 {
@@ -30,6 +32,16 @@ static PyObject* get_game_id(PyObject* module, PyObject* args)
 static PyObject* get_script_dir(PyObject* module, PyObject* args)
 {
   return Py_BuildValue("s", scriptDir.c_str());
+}
+
+static PyObject* get_dump_dir(PyObject* module, PyObject* args)
+{
+  return Py_BuildValue("s", dumpDir.c_str());
+}
+
+static PyObject* get_user_dir(PyObject* module, PyObject* args)
+{
+  return Py_BuildValue("s", userDir.c_str());
 }
 
 static PyObject* start_framedump(PyObject* module, PyObject* args)
@@ -224,8 +236,12 @@ static void setup_file_module(PyObject* module, FileState* state)
 PyMODINIT_FUNC PyInit_dol_utils()
 {
   scriptDir = File::GetUserPath(D_SCRIPTS_IDX);
+  dumpDir = File::GetUserPath(D_DUMP_IDX);
+  userDir = File::GetUserPath(D_USER_IDX);
   static PyMethodDef methods[] = {{"get_game_id", get_game_id, METH_NOARGS, ""},
                                   {"get_script_dir", get_script_dir, METH_NOARGS, ""},
+                                  {"get_dump_dir", get_dump_dir, METH_NOARGS, ""},
+                                  {"get_user_dir", get_user_dir, METH_NOARGS, ""},
                                   {"open_file", open_file, METH_NOARGS, ""},
                                   {"start_framedump", start_framedump, METH_NOARGS, ""},
                                   {"stop_framedump", stop_framedump, METH_NOARGS, ""},

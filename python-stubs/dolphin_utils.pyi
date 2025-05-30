@@ -9,7 +9,22 @@ def get_script_dir() -> str:
     :return: value as string
     """
 
+def get_dump_dir() -> str:
+    """
+    Returns the path to the Dump directory, \
+        which is found in the User folder by default.
 
+    :return: value as string
+    """
+	
+def get_user_dir() -> str:
+    """
+    Returns the path to the User directory
+	
+    :return: value as string
+    """
+	
+	
 def open_file() -> str:
     """
     Prompts the user to open a file.
