@@ -25,6 +25,9 @@ struct FrameDrawn
   int height;
   const u8* data;
 };
+struct FramePresent
+{
+};
 struct MemoryBreakpoint
 {
   u32 pc;
@@ -223,6 +226,7 @@ private:
 using EventHub = GenericEventHub<
   Events::FrameAdvance,
   Events::FrameDrawn,
+  Events::FramePresent,
   Events::MemoryBreakpoint,
   Events::CodeBreakpoint,
   Events::SetInterrupt,

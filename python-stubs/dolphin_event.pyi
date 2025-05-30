@@ -15,6 +15,14 @@ def on_frameadvance(callback: Callable[[], None] | None) -> None:
 async def frameadvance() -> None:
     """Awaitable event that completes once the game has rendered a new frame."""
 	
+	
+def on_framepresent(callback: Callable[[], None] | None) -> None:
+    """Registers a callback to be called every time the game has presented a new frame."""
+
+
+async def framepresent() -> None:
+    """Awaitable event that completes once the game has presented a new frame."""
+	
 
 def on_framebegin(callback: Callable[[], None] | None) -> None:
     """Registers a callback to be called every time the game checks for controller inputs.

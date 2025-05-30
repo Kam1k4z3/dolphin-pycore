@@ -834,6 +834,8 @@ void Presenter::RenderXFBToScreen(const MathUtil::Rectangle<int>& target_rc,
 
 void Presenter::Present()
 {
+  API::GetEventHub().EmitEvent(API::Events::FramePresent{});
+
   m_present_count++;
 
   if (g_gfx->IsHeadless() || (!m_onscreen_ui && !m_xfb_entry))
