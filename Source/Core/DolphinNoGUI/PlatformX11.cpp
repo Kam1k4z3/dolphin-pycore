@@ -226,9 +226,9 @@ void PlatformX11::ProcessEvents()
       {
         int slot_number = key - XK_F1 + 1;
         if (event.xkey.state & ShiftMask)
-          State::Save(Core::System::GetInstance(), slot_number);
+          State::Save(Core::System::GetInstance(), slot_number, false, true); // wait: false - emit event: true
         else
-          State::Load(Core::System::GetInstance(), slot_number);
+          State::Load(Core::System::GetInstance(), slot_number, true); //emit event: true
       }
       else if (key == XK_F9)
         Core::SaveScreenShot();
