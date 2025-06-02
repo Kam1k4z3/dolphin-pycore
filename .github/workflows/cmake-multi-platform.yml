@@ -23,6 +23,7 @@ jobs:
           build-essential \
           cmake \
           libev-dev \
+          libevdev-dev \
           pkg-config \
           libgl1-mesa-dev \
           libglu1-mesa-dev \
