@@ -1,0 +1,41 @@
+name: Manual Linux Build with Submodules and libev
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository with submodules
+      uses: actions/checkout@v4
+      with:
+        submodules: recursive
+
+    - name: Install dependencies (libev and pkg-config)
+      run: sudo apt-get update && sudo apt-get install -y libev-dev pkg-config
+
+    - name: Create build directory
+      run: mkdir build
+
+    - name: Configure CMake with LINUX_LOCAL_DEV and env var
+      working-directory: build
+      env:
+        CMAKE_POLICY_VERSION_MINIMUM: "3.5"
+      run: cmake .. -DLINUX_LOCAL_DEV=true
+
+    - name: Compile with make
+      working-directory: build
+      run: make -j$(nproc)
+
+    - name: Verify Build Success
+      if: success()
+      run: echo "✅ Build completed successfully!"
+
+    - name: Notify on Failure
+      if: failure()
+      run: echo "❌ Build failed!"
