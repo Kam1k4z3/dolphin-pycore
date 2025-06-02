@@ -27,6 +27,8 @@ jobs:
           libgl1-mesa-dev \
           libglu1-mesa-dev \
           libx11-dev \
+          libxrandr-dev \
+          libxi-dev \
           libegl1-mesa-dev \
           libavcodec-dev \
           libavformat-dev \
