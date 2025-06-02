@@ -1,4 +1,4 @@
-name: Manual Linux Build with Submodules and libev
+name: Linux
 
 on:
   push:
@@ -16,13 +16,29 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Install dependencies (libev and pkg-config)
-      run: sudo apt-get update && sudo apt-get install -y libev-dev pkg-config
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          cmake \
+          libev-dev \
+          pkg-config \
+          libgl1-mesa-dev \
+          libglu1-mesa-dev \
+          libx11-dev \
+          libegl1-mesa-dev \
+          libavcodec-dev \
+          libavformat-dev \
+          libavutil-dev \
+          libswresample-dev \
+          libswscale-dev \
+          libudev-dev
 
     - name: Create build directory
       run: mkdir build
 
-    - name: Configure CMake with LINUX_LOCAL_DEV and env var
+    - name: Configure CMake
       working-directory: build
       env:
         CMAKE_POLICY_VERSION_MINIMUM: "3.5"
